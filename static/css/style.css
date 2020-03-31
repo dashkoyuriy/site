@@ -1,0 +1,17 @@
+img { 
+width:500px;
+height: 500px;
+}
+
+.name {
+	margin-left: 200px;
+}
+
+h4 {
+	margin-left: 20px;
+	color: #808080;
+}
+
+h5 {
+	color: #0000f5;
+}

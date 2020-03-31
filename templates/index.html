@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<center><h2>Works log</h2></center>
+<a href="/departaments" class="btn btn-secondary">List of Departaments</a>
+{% if current_user.is_authenticated %}
+	<a href="addjob" class="btn btn-secondary">Add job</a>
+{% endif %}
+
+{% for mod in jobs%}
+<h2>Action # {{ loop.index }}</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="table-active" style="width: 40%">Title of activity</th>
+      <th class="table-active" style="width: 25%">Team leader</th>
+      <th class="table-active" style="width: 5%">Duration</th>
+      <th class="table-active" style="width: 15%">List of collaborators</th>
+	  <th class="table-active" style="width: 5%">Hazard categoty</th>
+	  <th class="table-active" style="width: 10%">Is finished</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="table-info">{{ mod[0] }}</td>
+      <td class="table-info">{{ mod[1] }}</td>
+      <td class="table-info">{{ mod[2] }}</td>
+      <td class="table-info">{{ mod[3] }}</td>
+	  <td class="table-info">{{ mod[7] }}</td>
+	  <td {% if "not" in mod[4]%} class="table-danger" {% else %} class="table-success" {% endif %}>{{ mod[4] }}</td>
+    </tr>
+  </tbody>
+
+  </table>
+   {% if current_user.is_authenticated and (current_user == mod[6] or current_user.id == 1)%}
+    <div>
+        <a href="/edit_job/{{ mod[5] }}" class="btn btn-warning">Изменить</a>
+        <a href="/job_delete/{{ mod[5] }}" class="btn btn-danger">Удалить</a>
+    </div>
+{% endif %}
+{% endfor %}
+{% endblock %}
